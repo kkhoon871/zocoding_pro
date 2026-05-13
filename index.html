@@ -54,7 +54,7 @@
       background: linear-gradient(135deg, var(--page-start), var(--page-end));
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       padding: 24px;
       transition: background 0.2s ease;
     }
@@ -63,8 +63,8 @@
       width: 100%;
       max-width: 520px;
       background: var(--panel);
-      border-radius: 24px;
-      padding: 32px;
+      border-radius: 20px;
+      padding: 24px;
       box-shadow: 0 20px 50px var(--shadow);
       text-align: center;
       transition: background 0.2s ease, color 0.2s ease;
@@ -73,7 +73,7 @@
     .top-bar {
       display: flex;
       justify-content: flex-end;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
     .theme-toggle {
@@ -95,13 +95,13 @@
     }
 
     h1 {
-      margin: 0 0 8px;
+      margin: 0 0 6px;
       font-size: 32px;
       color: var(--text);
     }
 
     .desc {
-      margin: 0 0 24px;
+      margin: 0 0 18px;
       color: var(--muted);
       line-height: 1.5;
     }
@@ -110,13 +110,13 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
 
     .control-box {
       background: var(--panel-soft);
-      border-radius: 14px;
-      padding: 14px;
+      border-radius: 12px;
+      padding: 12px;
       text-align: left;
     }
 
@@ -145,8 +145,8 @@
     button {
       width: 100%;
       border: none;
-      border-radius: 16px;
-      padding: 16px;
+      border-radius: 14px;
+      padding: 14px;
       font-size: 18px;
       font-weight: bold;
       color: white;
@@ -161,36 +161,41 @@
     }
 
     .result {
-      margin-top: 24px;
+      margin-top: 16px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 10px;
     }
 
     .set {
       background: var(--result-bg);
-      border-radius: 18px;
-      padding: 16px;
+      border-radius: 14px;
+      padding: 12px;
       border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      align-items: center;
+      gap: 10px;
     }
 
     .set-title {
-      text-align: left;
+      text-align: center;
       font-weight: bold;
       color: var(--text);
-      margin-bottom: 12px;
+      margin-bottom: 0;
+      white-space: nowrap;
     }
 
     .balls {
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 7px;
     }
 
     .ball {
-      width: 48px;
-      height: 48px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -208,7 +213,7 @@
     .green { background: #44bd32; }
 
     .copy-btn {
-      margin-top: 16px;
+      margin-top: 10px;
       background: var(--success);
       font-size: 15px;
       padding: 12px;
@@ -220,7 +225,7 @@
     }
 
     .notice {
-      margin-top: 18px;
+      margin-top: 12px;
       font-size: 13px;
       color: var(--subtle);
       line-height: 1.5;

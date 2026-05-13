@@ -5,6 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>로또번호 추천기</title>
   <style>
+    :root {
+      color-scheme: light;
+      --page-start: #f7d794;
+      --page-end: #778beb;
+      --panel: #ffffff;
+      --panel-soft: #f1f2f6;
+      --result-bg: #f8f9fa;
+      --border: #ececec;
+      --text: #2f3542;
+      --muted: #57606f;
+      --subtle: #747d8c;
+      --input: #ffffff;
+      --primary: #3742fa;
+      --primary-hover: #2f36d6;
+      --success: #2ed573;
+      --success-hover: #26b864;
+      --shadow: rgba(0, 0, 0, 0.2);
+    }
+
+    body.dark {
+      color-scheme: dark;
+      --page-start: #111827;
+      --page-end: #3d2c8d;
+      --panel: #181f2f;
+      --panel-soft: #232c40;
+      --result-bg: #20293a;
+      --border: #344058;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --subtle: #94a3b8;
+      --input: #111827;
+      --primary: #7c83ff;
+      --primary-hover: #6a70e8;
+      --success: #22c55e;
+      --success-hover: #16a34a;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -13,32 +51,58 @@
       margin: 0;
       min-height: 100vh;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #f7d794, #778beb);
+      background: linear-gradient(135deg, var(--page-start), var(--page-end));
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 24px;
+      transition: background 0.2s ease;
     }
 
     .container {
       width: 100%;
       max-width: 520px;
-      background: white;
+      background: var(--panel);
       border-radius: 24px;
       padding: 32px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 20px 50px var(--shadow);
       text-align: center;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 14px;
+    }
+
+    .theme-toggle {
+      width: auto;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--panel-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .theme-toggle:hover {
+      background: var(--result-bg);
+      transform: translateY(-1px);
     }
 
     h1 {
       margin: 0 0 8px;
       font-size: 32px;
-      color: #2f3542;
+      color: var(--text);
     }
 
     .desc {
       margin: 0 0 24px;
-      color: #57606f;
+      color: var(--muted);
       line-height: 1.5;
     }
 
@@ -50,7 +114,7 @@
     }
 
     .control-box {
-      background: #f1f2f6;
+      background: var(--panel-soft);
       border-radius: 14px;
       padding: 14px;
       text-align: left;
@@ -59,18 +123,23 @@
     label {
       display: block;
       font-size: 14px;
-      color: #57606f;
+      color: var(--muted);
       margin-bottom: 8px;
     }
 
     select, input {
       width: 100%;
-      border: none;
+      border: 1px solid transparent;
       border-radius: 10px;
       padding: 10px;
       font-size: 16px;
-      background: white;
+      color: var(--text);
+      background: var(--input);
       outline: none;
+    }
+
+    select:focus, input:focus {
+      border-color: var(--primary);
     }
 
     button {
@@ -81,13 +150,13 @@
       font-size: 18px;
       font-weight: bold;
       color: white;
-      background: #3742fa;
+      background: var(--primary);
       cursor: pointer;
       transition: transform 0.15s ease, background 0.15s ease;
     }
 
     button:hover {
-      background: #2f36d6;
+      background: var(--primary-hover);
       transform: translateY(-2px);
     }
 
@@ -99,16 +168,16 @@
     }
 
     .set {
-      background: #f8f9fa;
+      background: var(--result-bg);
       border-radius: 18px;
       padding: 16px;
-      border: 1px solid #ececec;
+      border: 1px solid var(--border);
     }
 
     .set-title {
       text-align: left;
       font-weight: bold;
-      color: #2f3542;
+      color: var(--text);
       margin-bottom: 12px;
     }
 
@@ -140,20 +209,20 @@
 
     .copy-btn {
       margin-top: 16px;
-      background: #2ed573;
+      background: var(--success);
       font-size: 15px;
       padding: 12px;
       display: none;
     }
 
     .copy-btn:hover {
-      background: #26b864;
+      background: var(--success-hover);
     }
 
     .notice {
       margin-top: 18px;
       font-size: 13px;
-      color: #747d8c;
+      color: var(--subtle);
       line-height: 1.5;
     }
 
@@ -180,8 +249,12 @@
 </head>
 <body>
   <main class="container">
-    <h1>🍀 로또번호 추천기</h1>
-    <p class="desc">1부터 45까지 숫자 중 중복 없이 6개를 랜덤 추천합니다.</p>
+    <div class="top-bar">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 변경">🌙 다크</button>
+    </div>
+
+    <h1>🎱 로또번호 추천기</h1>
+    <p class="desc">1부터 45까지 숫자 중 중복 없이 6개를 무작위로 추천합니다.</p>
 
     <div class="controls">
       <div class="control-box">
@@ -200,13 +273,13 @@
       </div>
     </div>
 
-    <button onclick="generateLotto()">번호 추천받기</button>
-    <button class="copy-btn" id="copyBtn" onclick="copyNumbers()">결과 복사하기</button>
+    <button type="button" onclick="generateLotto()">번호 추천받기</button>
+    <button class="copy-btn" id="copyBtn" type="button" onclick="copyNumbers()">결과 복사하기</button>
 
     <section class="result" id="result"></section>
 
     <p class="notice">
-      이 추천기는 재미용 랜덤 번호 생성기입니다. 당첨을 보장하지 않습니다.
+      이 추천기는 무작위 번호 생성기입니다. 당첨을 보장하지 않습니다.
     </p>
   </main>
 
@@ -311,6 +384,22 @@
         .catch(() => alert('복사에 실패했습니다. 직접 선택해서 복사해주세요.'));
     }
 
+    function applyTheme(theme) {
+      const isDark = theme === 'dark';
+      const toggle = document.getElementById('themeToggle');
+
+      document.body.classList.toggle('dark', isDark);
+      toggle.textContent = isDark ? '☀️ 화이트' : '🌙 다크';
+      toggle.setAttribute('aria-label', isDark ? '화이트 모드로 변경' : '다크 모드로 변경');
+      localStorage.setItem('theme', theme);
+    }
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const nextTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+      applyTheme(nextTheme);
+    });
+
+    applyTheme(localStorage.getItem('theme') || 'light');
     generateLotto();
   </script>
 </body>

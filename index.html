@@ -227,22 +227,140 @@
     }
 
     @media (max-width: 480px) {
+      body {
+        align-items: flex-start;
+        padding: 10px;
+      }
+
       .container {
-        padding: 24px 18px;
+        border-radius: 18px;
+        padding: 14px;
+        box-shadow: 0 12px 28px var(--shadow);
+      }
+
+      .top-bar {
+        margin-bottom: 6px;
+      }
+
+      .theme-toggle {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+
+      .controls {
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .control-box {
+        border-radius: 12px;
+        padding: 10px;
+      }
+
+      label {
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+
+      select, input {
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+      }
+
+      h1 {
+        margin-bottom: 4px;
+        font-size: 24px;
+      }
+
+      .desc {
+        margin-bottom: 12px;
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      button {
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 16px;
+      }
+
+      .copy-btn {
+        margin-top: 8px;
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      .result {
+        margin-top: 12px;
+        gap: 8px;
+      }
+
+      .set {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        align-items: center;
+        gap: 8px;
+        border-radius: 12px;
+        padding: 10px;
+      }
+
+      .set-title {
+        margin-bottom: 0;
+        font-size: 12px;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .balls {
+        justify-content: flex-end;
+        gap: 5px;
+      }
+
+      .ball {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+      }
+
+      .notice {
+        margin-top: 10px;
+        font-size: 11px;
+        line-height: 1.35;
+      }
+    }
+
+    @media (max-width: 360px) {
+      body {
+        padding: 6px;
+      }
+
+      .container {
+        padding: 12px;
       }
 
       .controls {
         grid-template-columns: 1fr;
       }
 
-      h1 {
-        font-size: 26px;
+      .set {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .set-title {
+        text-align: left;
+      }
+
+      .balls {
+        justify-content: center;
       }
 
       .ball {
-        width: 42px;
-        height: 42px;
-        font-size: 16px;
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
       }
     }
   </style>
